@@ -1,5 +1,3 @@
-// script.js
-
 function validateForm(event) {
     event.preventDefault();
     
@@ -10,6 +8,7 @@ function validateForm(event) {
     var errors = document.querySelectorAll('.error');
     errors.forEach(function(error) {
         error.innerHTML = "";
+        error.style.display = 'none';
     });
     
     // Validate all fields
@@ -28,13 +27,15 @@ function validateForm(event) {
         isValid = false;
     }
     
-    // Email validation
-    if (email && email.value.trim() === "") {
-        showError('emailError', 'Email is required');
-        isValid = false;
-    } else if (email && !validateEmail(email.value)) {
-        showError('emailError', 'Please enter a valid email address');
-        isValid = false;
+    // Email validation (only if email field exists)
+    if (email) {
+        if (email.value.trim() === "") {
+            showError('emailError', 'Email is required');
+            isValid = false;
+        } else if (!validateEmail(email.value)) {
+            showError('emailError', 'Please enter a valid email address');
+            isValid = false;
+        }
     }
     
     // Password validation
@@ -47,12 +48,14 @@ function validateForm(event) {
     }
     
     // Confirm password validation (only for signup)
-    if (confirmPassword && confirmPassword.value === "") {
-        showError('confirmPasswordError', 'Please confirm your password');
-        isValid = false;
-    } else if (confirmPassword && password && confirmPassword.value !== password.value) {
-        showError('confirmPasswordError', 'Passwords do not match');
-        isValid = false;
+    if (confirmPassword) {
+        if (confirmPassword.value === "") {
+            showError('confirmPasswordError', 'Please confirm your password');
+            isValid = false;
+        } else if (password && confirmPassword.value !== password.value) {
+            showError('confirmPasswordError', 'Passwords do not match');
+            isValid = false;
+        }
     }
     
     // Terms validation (only for signup)
@@ -81,6 +84,7 @@ function showError(elementId, message) {
     var errorElement = document.getElementById(elementId);
     if (errorElement) {
         errorElement.innerHTML = message;
+        errorElement.style.display = 'block';
     }
 }
 
@@ -88,6 +92,7 @@ function clearError(elementId) {
     var errorElement = document.getElementById(elementId);
     if (errorElement) {
         errorElement.innerHTML = "";
+        errorElement.style.display = 'none';
     }
 }
 
@@ -113,10 +118,12 @@ function validateField(field) {
     
     switch(field.type) {
         case 'text':
-            if (value === "") {
-                showError(errorId, 'Username is required');
-            } else if (value.length < 3) {
-                showError(errorId, 'Username must be at least 3 characters');
+            if (field.id === 'username') {
+                if (value === "") {
+                    showError(errorId, 'Username is required');
+                } else if (value.length < 3) {
+                    showError(errorId, 'Username must be at least 3 characters');
+                }
             }
             break;
             

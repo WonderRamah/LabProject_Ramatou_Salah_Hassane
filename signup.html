@@ -4,12 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/styles.css">
     <title>Sign up page</title>
 </head>
 <body>
      <div class="all">
-        <form action="">
+        <form id="signupForm">
             <h1>Register</h1>
             <div class="input">
                 <input type="text" id="username" placeholder="Username" required>
@@ -18,30 +18,31 @@
             </div>
             <div class="input">
                 <input type="email" id="email" placeholder="Email" required>
-                <i class='bx bx-envelope' ></i> 
+                <i class='bx bx-envelope'></i> 
                 <span id="emailError" class="error"></span>
             </div>
             <div class="input">
                 <input type="password" id="password" placeholder="Password" required>
-                <i class='bx bx-lock-alt' ></i>
-                <span id="emailError" class="error"></span>
+                <i class='bx bx-lock-alt'></i>
+                <span id="passwordError" class="error"></span>
             </div>
             <div class="input">
                 <input type="password" id="confirmPassword" placeholder="Confirm password" required>
-                <i class='bx bx-lock-alt' ></i>
-                <span id="emailError" class="error"></span>
+                <i class='bx bx-lock-alt'></i>
+                <span id="confirmPasswordError" class="error"></span>
             </div>
 
             <div class="rememberMessage">
                 <label><input type="checkbox" id="terms">Agree to terms and conditions</label>
+                <span id="termsError" class="error"></span>
             </div>
 
-            <button type="Submit" class="btn">Sign up </button>
+            <button type="submit" class="btn">Sign up</button>
             <div class="loginLink">
                 <p>Already have an account? <a href="login.html">Log in</a></p>
             </div>
         </form>
     </div>
-    <script src="script.js"></script>
+    <script src="validation.js"></script>
 </body>
 </html>

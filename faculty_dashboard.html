@@ -4,18 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-    <link rel="stylesheet" href="styles2.css">
-    <title>Faculty page</title>
+    <link rel="stylesheet" href="../css/styles2.css">
+    <title>Faculty Dashboard</title>
 </head>
-<body class="dashboard">
-    <h2>Faculty dashboard</h2>
+<body class="dashboard" style="background-color: black;">
+    <h2>Faculty Dashboard</h2>
     <nav class="navbar">
         <ul>
             <li><a href="#courses">Course Management</a></li>
             <li><a href="#sessions">Session Overview</a></li>
             <li><a href="#grades">Attendance Reports</a></li>
             <li><a href="login.html">Logout</a></li>
-            <li><input type="text" placeholder="Search..."><i class='bx bx-search-alt-2'></i></li>
+            <li>
+                <input type="text" placeholder="Search...">
+                <i class='bx bx-search-alt-2'></i>
+            </li>
         </ul>
     </nav>
 
@@ -24,27 +27,46 @@
         <section id="manage" class="section">
             <h3>Course Management</h3>
             <ul>
-                <li>Add course</li>
-                <li>Edit</li>
-                <li>Delete</li>
+                <li>Add New Course</li>
+                <li>Edit Course Details</li>
+                <li>Manage Course Materials</li>
+                <li>Delete Course</li>
+                <li>Set Course Schedule</li>
             </ul>
+            <div style="margin-top: 20px;">
+                <button style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: rgba(255, 255, 0, 0.888); cursor: pointer;">Create Course</button>
+                <button style="padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; background: rgba(255, 255, 255, 0.3); color: white; cursor: pointer;">Manage Existing</button>
+            </div>
         </section>    
         
         <section id="session" class="section">
             <h3>Session Overview</h3>
             <ul>
                 <li>Web Tech - 5 sessions - Avg Attendance: 90%</li>
-                <li>Intro to AI - 3 sessions - Avg Attendance: 82% </li>
+                <li>Intro to AI - 3 sessions - Avg Attendance: 82%</li>
+                <li>Data Structures - 4 sessions - Avg Attendance: 87%</li>
+                <li>Database Systems - 6 sessions - Avg Attendance: 94%</li>
+                <li>Software Engineering - 3 sessions - Avg Attendance: 79%</li>
             </ul>
+            <p style="margin-top: 15px;">
+                <a href="#">View All Sessions</a> | 
+                <a href="#">Schedule New Session</a>
+            </p>
         </section>   
 
         <section id="report" class="section">
-            <h3>Reports</h3>
-            <a href="#">View performance reports</a><br>
-            <a href="#">Export Data</a>
+            <h3>Reports & Analytics</h3>
+            <ul>
+                <li><a href="#">Student Performance Reports</a></li>
+                <li><a href="#">Attendance Analytics</a></li>
+                <li><a href="#">Course Completion Rates</a></li>
+                <li><a href="#">Grade Distribution</a></li>
+            </ul>
+            <div style="margin-top: 20px;">
+                <a href="#" style="display: inline-block; padding: 10px 20px; background: rgba(255, 255, 0, 0.888); color: #333; text-decoration: none; border-radius: 5px; margin-right: 10px;">Export Data</a>
+                <a href="#" style="display: inline-block; padding: 10px 20px; background: rgba(255, 255, 255, 0.3); color: white; text-decoration: none; border-radius: 5px;">Generate Report</a>
+            </div>
         </section>
-
      </main>
-    
 </body>
 </html>
