@@ -5,44 +5,70 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <link rel="stylesheet" href="../css/styles.css">
-    <title>Sign up page</title>
+    <!-- Include SweetAlert2 for nice alerts -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <title>Sign up - Attendance Manager</title>
 </head>
 <body>
      <div class="all">
         <form id="signupForm">
-            <h1>Register</h1>
+            <h1>Create Account</h1>
+            
             <div class="input">
-                <input type="text" id="username" placeholder="Username" required>
+                <input type="text" id="firstName" placeholder="First Name" required>
                 <i class='bx bxs-user'></i>
-                <span id="usernameError" class="error"></span>
             </div>
+            <span id="firstNameError" class="error"></span>
+            
             <div class="input">
-                <input type="email" id="email" placeholder="Email" required>
+                <input type="text" id="lastName" placeholder="Last Name" required>
+                <i class='bx bxs-user'></i>
+            </div>
+            <span id="lastNameError" class="error"></span>
+            
+            <div class="input">
+                <input type="email" id="email" placeholder="Email Address" required>
                 <i class='bx bx-envelope'></i> 
-                <span id="emailError" class="error"></span>
             </div>
+            <span id="emailError" class="error"></span>
+            
             <div class="input">
-                <input type="password" id="password" placeholder="Password" required>
+                <input type="password" id="password" placeholder="Password (min 6 characters)" required>
                 <i class='bx bx-lock-alt'></i>
-                <span id="passwordError" class="error"></span>
             </div>
+            <span id="passwordError" class="error"></span>
+            
             <div class="input">
-                <input type="password" id="confirmPassword" placeholder="Confirm password" required>
+                <input type="password" id="confirmPassword" placeholder="Confirm Password" required>
                 <i class='bx bx-lock-alt'></i>
-                <span id="confirmPasswordError" class="error"></span>
             </div>
+            <span id="confirmPasswordError" class="error"></span>
+            
+            <div class="input">
+                <select id="role" required>
+                    <option value="">Select Your Role</option>
+                    <option value="student">Student</option>
+                    <option value="faculty">Faculty</option>
+                    <option value="faculty Intern">Faculty</option>
+                </select>
+            </div>
+            <span id="roleError" class="error"></span>
 
             <div class="rememberMessage">
-                <label><input type="checkbox" id="terms">Agree to terms and conditions</label>
-                <span id="termsError" class="error"></span>
+                <label>
+                    <input type="checkbox" id="terms">
+                    I agree to terms and conditions
+                </label>
             </div>
+            <span id="termsError" class="error"></span>
 
-            <button type="submit" class="btn">Sign up</button>
+            <button type="submit" class="btn">Create Account</button>
+            
             <div class="loginLink">
-                <p>Already have an account? <a href="login.html">Log in</a></p>
+                <p>Already have an account? <a href="login.html">Login here</a></p>
             </div>
         </form>
     </div>
-    <script src="validation.js"></script>
+    <script src="../js/signup.js"></script>
 </body>
 </html>
