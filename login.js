@@ -1,14 +1,11 @@
-// Wait for the DOM to be fully loaded
+// js/login.js - Login form handler
 document.addEventListener('DOMContentLoaded', function() {
-    // Get the login form
     const loginForm = document.getElementById('loginForm');
     
-    // Add event listener for form submission
     loginForm.addEventListener('submit', function(e) {
-        // Prevent the default form submission
         e.preventDefault();
         
-        // Get form values (note: using 'username' ID but it's actually email)
+        // Get form values
         const email = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value;
         
@@ -34,12 +31,11 @@ document.addEventListener('DOMContentLoaded', function() {
             isValid = false;
         }
         
-        // If validation fails, stop here
         if (!isValid) {
             return;
         }
         
-        // Create data object to send
+        // Create data object
         const loginData = {
             email: email,
             password: password
@@ -54,7 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Send data to server using Fetch API
+        // Send data to server
         fetch('../php/login.php', {
             method: 'POST',
             headers: {
@@ -63,39 +59,39 @@ document.addEventListener('DOMContentLoaded', function() {
             body: JSON.stringify(loginData)
         })
         .then(response => {
-            // Check if the response is ok
             if (!response.ok) {
                 throw new Error('Network response was not ok');
             }
-            // Parse JSON response
             return response.json();
         })
         .then(data => {
-            // Close loading alert
             Swal.close();
             
-            // Check if login was successful
             if (data.success) {
                 // Show success message
                 Swal.fire({
                     icon: 'success',
                     title: 'Welcome!',
-                    text: `Hello, ${data.first_name}!`,
+                    text: `Hello, ${data.user.first_name}!`,
                     timer: 1500,
                     showConfirmButton: false
                 }).then(() => {
                     // Redirect based on role
-                    if (data.role === 'student') {
-                        window.location.href = 'student_dashboard.html';
-                    } else if (data.role === 'faculty') {
-                        window.location.href = 'faculty_dashboard.html';
-                    } else {
-                        // Default redirect if role is unknown
-                        window.location.href = 'role.html';
+                    switch(data.user.role) {
+                        case 'student':
+                            window.location.href = 'student_dashboard.html';
+                            break;
+                        case 'faculty':
+                            window.location.href = 'faculty_dashboard.html';
+                            break;
+                        case 'faculty_intern':
+                            window.location.href = 'faculty_intern_dashboard.html';
+                            break;
+                        default:
+                            window.location.href = 'role.html';
                     }
                 });
             } else {
-                // Show error message from server
                 Swal.fire({
                     icon: 'error',
                     title: 'Login Failed',
@@ -104,7 +100,6 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         })
         .catch(error => {
-            // Handle any errors
             console.error('Error:', error);
             Swal.close();
             Swal.fire({
@@ -115,7 +110,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Helper function to show error
     function showError(elementId, message) {
         const errorElement = document.getElementById(elementId);
         if (errorElement) {
@@ -124,7 +118,6 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Helper function to clear all errors
     function clearAllErrors() {
         const errors = document.querySelectorAll('.error');
         errors.forEach(function(error) {

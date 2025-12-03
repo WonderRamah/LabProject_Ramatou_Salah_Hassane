@@ -1,27 +1,20 @@
 <?php
-// Start session
+// php/login.php - User login handler
 session_start();
-
-// Set header to return JSON response
 header('Content-Type: application/json');
 
-// Include database connection
-require_once '../db_connection.php';
+// Include database connection from root folder
+require_once __DIR__ . '/../db_connection.php';
 
-// Initialize response array
 $response = array();
 
-// Check if request method is POST
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    // Get JSON data from request body
     $json_data = file_get_contents('php://input');
     $data = json_decode($json_data, true);
     
-    // Validate that required fields are present
     if (isset($data['email']) && isset($data['password'])) {
         
-        // Get and sanitize input data
         $email = trim($data['email']);
         $password = $data['password'];
         
@@ -47,7 +40,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         $result = $stmt->get_result();
         
-        // Check if user exists
         if ($result->num_rows === 1) {
             $user = $result->fetch_assoc();
             
@@ -60,15 +52,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['last_name'] = $user['last_name'];
                 $_SESSION['role'] = $user['role'];
                 $_SESSION['logged_in'] = true;
+                $_SESSION['last_activity'] = time();
                 
                 // Success response
                 $response['success'] = true;
                 $response['message'] = "Login successful!";
-                $response['user_id'] = $user['user_id'];
-                $response['email'] = $user['email'];
-                $response['first_name'] = $user['first_name'];
-                $response['last_name'] = $user['last_name'];
-                $response['role'] = $user['role'];
+                $response['user'] = array(
+                    'user_id' => $user['user_id'],
+                    'email' => $user['email'],
+                    'first_name' => $user['first_name'],
+                    'last_name' => $user['last_name'],
+                    'role' => $user['role']
+                );
                 
             } else {
                 // Password is incorrect
@@ -85,20 +80,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->close();
         
     } else {
-        // Missing required fields
         $response['success'] = false;
         $response['message'] = "Email and password are required";
     }
     
 } else {
-    // Not a POST request
     $response['success'] = false;
     $response['message'] = "Invalid request method";
 }
 
-// Close database connection
 $conn->close();
-
-// Return JSON response
 echo json_encode($response);
 ?>

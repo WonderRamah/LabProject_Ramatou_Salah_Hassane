@@ -1,4 +1,5 @@
 <?php
+// php/signup.php - User registration handler
 session_start();
 header('Content-Type: application/json');
 
@@ -32,7 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $errors[] = "Password must be at least 6 characters";
         }
         
-        if ($role !== 'student' && $role !== 'faculty') {
+        // Updated role validation to include faculty_intern
+        $valid_roles = ['student', 'faculty', 'faculty_intern'];
+        if (!in_array($role, $valid_roles)) {
             $errors[] = "Invalid role selected";
         }
         
@@ -76,7 +79,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $user_id = $conn->insert_id;
             $stmt->close();
             
-            // Insert into role table
+            // Insert into role-specific table
             if ($role === 'student') {
                 $role_stmt = $conn->prepare("INSERT INTO students (student_id) VALUES (?)");
                 $role_stmt->bind_param("i", $user_id);
@@ -84,6 +87,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $role_stmt->close();
             } elseif ($role === 'faculty') {
                 $role_stmt = $conn->prepare("INSERT INTO faculty (faculty_id) VALUES (?)");
+                $role_stmt->bind_param("i", $user_id);
+                $role_stmt->execute();
+                $role_stmt->close();
+            } elseif ($role === 'faculty_intern') {
+                // You may need to create a faculty_interns table
+                // For now, we'll insert into faculty table or create separate table
+                $role_stmt = $conn->prepare("INSERT INTO faculty_interns (intern_id) VALUES (?)");
                 $role_stmt->bind_param("i", $user_id);
                 $role_stmt->execute();
                 $role_stmt->close();
@@ -97,7 +107,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         } catch (Exception $e) {
             $conn->rollback();
             $response['success'] = false;
-            $response['message'] = "Error creating account";
+            $response['message'] = "Error creating account: " . $e->getMessage();
         }
         
     } else {
