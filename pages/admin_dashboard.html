@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Attendance System</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Admin Portal</h2>
+                <p id="adminName">Loading...</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-section="overview">
+                    📊 Overview
+                </a>
+                <a href="#" class="nav-link" data-section="users">
+                    👥 Users
+                </a>
+                <a href="#" class="nav-link" data-section="courses">
+                    📚 Courses
+                </a>
+                <a href="#" class="nav-link" data-section="reports">
+                    📈 Reports
+                </a>
+                <a href="#" class="nav-link" id="logoutBtn">
+                    🚪 Logout
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1 id="sectionTitle">System Overview</h1>
+            </header>
+            
+            <div class="content-body">
+                <!-- Overview Section -->
+                <section id="overviewSection" class="content-section active">
+                    <div class="loading">Loading overview...</div>
+                    <div id="overviewContent"></div>
+                </section>
+                
+                <!-- Users Section -->
+                <section id="usersSection" class="content-section">
+                    <div class="loading">Loading users...</div>
+                    <div id="usersList"></div>
+                </section>
+                
+                <!-- Courses Section -->
+                <section id="coursesSection" class="content-section">
+                    <button class="btn btn-primary" id="createCourseBtn">Create New Course</button>
+                    <div class="loading">Loading courses...</div>
+                    <div id="coursesList"></div>
+                </section>
+                
+                <!-- Reports Section -->
+                <section id="reportsSection" class="content-section">
+                    <div class="loading">Loading reports...</div>
+                    <div id="reportsList"></div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../assets/js/admin.js"></script>
+</body>
+</html>

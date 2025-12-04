@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard - Attendance System</title>
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Student Portal</h2>
+                <p id="studentName">Loading...</p>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-section="courses">
+                    📚 My Courses
+                </a>
+                <a href="#" class="nav-link" data-section="attendance">
+                    ✓ My Attendance
+                </a>
+                <a href="#" class="nav-link" data-section="sessions">
+                    📅 Upcoming Sessions
+                </a>
+                <a href="#" class="nav-link" id="logoutBtn">
+                    🚪 Logout
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="content-header">
+                <h1 id="sectionTitle">My Courses</h1>
+            </header>
+            
+            <div class="content-body">
+                <!-- Courses Section -->
+                <section id="coursesSection" class="content-section active">
+                    <div class="loading">Loading courses...</div>
+                    <div id="coursesList"></div>
+                </section>
+                
+                <!-- Attendance Section -->
+                <section id="attendanceSection" class="content-section">
+                    <div class="loading">Loading attendance...</div>
+                    <div id="attendanceList"></div>
+                </section>
+                
+                <!-- Sessions Section -->
+                <section id="sessionsSection" class="content-section">
+                    <div class="loading">Loading sessions...</div>
+                    <div id="sessionsList"></div>
+                </section>
+            </div>
+        </main>
+    </div>
+    
+    <script src="../assets/js/student.js"></script>
+</body>
+</html>
