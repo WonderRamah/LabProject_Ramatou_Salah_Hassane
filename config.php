@@ -1,12 +1,10 @@
 <?php
-// config.php - Database configuration
-// Place this in your project root
 
-// Database credentials - CHANGE THESE TO YOUR SERVER SETTINGS
+// Database credentials 
 define('DB_HOST', 'localhost');
-define('DB_USER', 'ramatou.hassane');      // Change this
-define('DB_PASS', 'H00pla%a');      // Change this
-define('DB_NAME', 'attendance_db');      // Change this
+define('DB_USER', 'ramatou.hassane');   
+define('DB_PASS', 'H00pla%a');     
+define('DB_NAME', 'webtech_2025A_ramatou_hassane');      
 
 // Start session if not already started
 if (session_status() === PHP_SESSION_NONE) {
